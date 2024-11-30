@@ -59,7 +59,7 @@ const data = {
       items: [
         {
           title: 'Overview',
-          url: '#',
+          url: '/dashboard',
         },
         {
           title: 'Activity',
@@ -78,7 +78,7 @@ const data = {
       items: [
         {
           title: 'Search Candidates',
-          url: '#',
+          url: '/dashboard/candidates',
         },
         {
           title: 'Shortlisted',
@@ -97,7 +97,7 @@ const data = {
       items: [
         {
           title: 'Active Jobs',
-          url: '#',
+          url: '/dashboard/jobs',
         },
         {
           title: 'Closed Jobs',
@@ -116,7 +116,7 @@ const data = {
       items: [
         {
           title: 'Profile Settings',
-          url: '#',
+          url: '/dashboard/settings',
         },
         {
           title: 'Team Management',
