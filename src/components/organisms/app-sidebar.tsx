@@ -1,6 +1,5 @@
 'use client'
 
-import * as React from 'react'
 import {
   AudioWaveform,
   BookOpen,
@@ -30,7 +29,7 @@ import {
 const data = {
   user: {
     name: 'Syphtr',
-    email: 'm@example.com',
+    email: 'trainguitar@gmail.com',
     avatar: '/avatars/shadcn.jpg',
   },
   teams: [
@@ -82,7 +81,7 @@ const data = {
         },
         {
           title: 'Shortlisted',
-          url: '#',
+          url: '/dashboard/candidates/shortlist',
         },
         {
           title: 'Archived',

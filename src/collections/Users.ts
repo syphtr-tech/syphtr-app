@@ -18,5 +18,10 @@ export const Users: CollectionConfig = {
       type: 'select',
       options: ['admin', 'user'],
     },
+    {
+      name: 'avatar',
+      type: 'upload',
+      relationTo: 'media',
+    },
   ],
 }

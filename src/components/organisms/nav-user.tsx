@@ -1,6 +1,9 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from 'lucide-react'
+
+import { useQuery } from '@tanstack/react-query'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
@@ -19,6 +22,13 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 
+const fetchUsers = async () => {
+  const req = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/users`)
+  const data = await req.json()
+
+  return data
+}
+
 export function NavUser({
   user,
 }: {
@@ -28,6 +38,13 @@ export function NavUser({
     avatar: string
   }
 }) {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  })
+
+  console.log(data?.docs[0].email)
+
   const { isMobile } = useSidebar()
 
   return (
@@ -40,12 +57,12 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage src={data?.docs[0].avatar.url} alt={data?.docs[0].name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-semibold">{data?.docs[0].name}</span>
+                <span className="truncate text-xs">{data?.docs[0].email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -58,13 +75,16 @@ export function NavUser({
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
+                {user && (
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarImage src={data?.docs[0].avatar.url} alt={data?.docs[0].name} />
+                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  </Avatar>
+                )}
+
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate font-semibold">{data?.docs[0].name}</span>
+                  <span className="truncate text-xs">{data?.docs[0].email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>

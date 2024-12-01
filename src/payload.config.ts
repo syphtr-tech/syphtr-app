@@ -9,6 +9,8 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import Logo from './components/atoms/Logo'
+
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
